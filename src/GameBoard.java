@@ -66,11 +66,11 @@ public class GameBoard {
         for(int row = 0; row < 8; row++) {
             for(int col = 0; col < 8; col++) {
                 if(grid[row][col] == Color.red) {
-                    System.out.println("R  ");
+                    System.out.print("R  ");
                 } else if(grid[row][col] == Color.blue) {
-                    System.out.println("B  ");
+                    System.out.print("B  ");
                 }else if(grid[row][col] == null) {
-                    System.out.println("_  ");
+                    System.out.print("_  ");
                 }
             }
             System.out.println("");
