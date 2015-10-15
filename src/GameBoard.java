@@ -53,7 +53,19 @@ public class GameBoard extends JComponent{
     public void paintComponent(Graphics g) {
         for(int row = 0; row < 8; row ++) {
             for(int col = 0; col < 8; col ++) {
-                g.drawRect(row * TILE_SIZE + 25, col * TILE_SIZE + 25, TILE_SIZE, TILE_SIZE);
+                //alternate colours of the grid
+                if((row + col)%2 == 0) {
+                    g.setColor(Color.white);
+                } else {
+                    g.setColor(Color.black);
+                }
+                //draws single spot
+                g.fillRect(row * TILE_SIZE + 25, col * TILE_SIZE + 25, TILE_SIZE, TILE_SIZE);
+                //draw a piece
+                if(grid[row][col] != null) {
+                    g.setColor(grid[row][col]);
+                    g.fillOval(col * TILE_SIZE + 50, row * TILE_SIZE + 50, TILE_SIZE / 2, TILE_SIZE / 2);
+                }
             }
         }
     }

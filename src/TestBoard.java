@@ -20,7 +20,7 @@ public class TestBoard {
         board.putPiece(2, 3, Color.blue);
         board.putPiece(1, 1, Color.red);
         
-        board.printBoard();
+        //board.printBoard();
         
     }
 }
