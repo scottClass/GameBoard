@@ -17,8 +17,8 @@ public class TestBoard {
      */
     public static void main(String[] args) {
         GameBoard board = new GameBoard();
-        board.putPiece(2, 3, Color.blue);
-        board.putPiece(1, 1, Color.red);
+
+        int pRow = 5;
         
         while(true) {
             //wait for the user to click
