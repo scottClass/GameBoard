@@ -20,7 +20,14 @@ public class TestBoard {
         board.putPiece(2, 3, Color.blue);
         board.putPiece(1, 1, Color.red);
         
-        //board.printBoard();
+        while(true) {
+            //wait for the user to click
+            Coordinate c = board.getClick();
+            int row = c.getRow();
+            int col = c.getCol();
+            //put a piece where they clicked
+            board.putPiece(row, col, Color.blue);
+        }
         
     }
 }

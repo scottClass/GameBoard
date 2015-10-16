@@ -2,6 +2,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -14,13 +16,13 @@ import javax.swing.JFrame;
  *A class that represents a 8x8 game board like used in checkers
  * @author johns6971
  */
-public class GameBoard extends JComponent{
+public class GameBoard extends JComponent implements MouseListener{
     
     private Color[][] grid = new Color[8][8];
     private String message = "";
     private JFrame window;
-    
     private final int TILE_SIZE = 100;
+    private Coordinate click = null; 
     
     /**
      * creates a brand new empty 8x8 board
@@ -43,6 +45,8 @@ public class GameBoard extends JComponent{
         window.pack();
         //set the X
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //add the mouse listener
+        this.addMouseListener(this);
     }
     
     /**
@@ -60,11 +64,11 @@ public class GameBoard extends JComponent{
                     g.setColor(Color.black);
                 }
                 //draws single spot
-                g.fillRect(row * TILE_SIZE + 25, col * TILE_SIZE + 25, TILE_SIZE, TILE_SIZE);
+                g.fillRect(col * TILE_SIZE + TILE_SIZE/4, row * TILE_SIZE + TILE_SIZE/4, TILE_SIZE, TILE_SIZE);
                 //draw a piece
                 if(grid[row][col] != null) {
                     g.setColor(grid[row][col]);
-                    g.fillOval(col * TILE_SIZE + 50, row * TILE_SIZE + 50, TILE_SIZE / 2, TILE_SIZE / 2);
+                    g.fillOval(col * TILE_SIZE + TILE_SIZE/2, row * TILE_SIZE + TILE_SIZE/2, TILE_SIZE / 2, TILE_SIZE / 2);
                 }
             }
         }
@@ -78,6 +82,7 @@ public class GameBoard extends JComponent{
     **/
     public void putPiece(int row, int col, Color Colour) {
         grid[row][col] = Colour;
+        repaint();
     }
     /**
      * 
@@ -85,7 +90,8 @@ public class GameBoard extends JComponent{
      * @param col the column at which to remove the piece
      */
     public void removePiece(int row, int col) {
-        
+        grid[row][col] = null;
+        repaint();
     }
     /**
      * 
@@ -97,6 +103,7 @@ public class GameBoard extends JComponent{
                 grid[row][col] = null;
             }
         }
+        repaint();
     }
     /**
      * Displays a message in the game area
@@ -104,6 +111,7 @@ public class GameBoard extends JComponent{
      */
     public void setMessage(String theMessage) {
         message = theMessage;
+        repaint();
     }
     
     public void printBoard() {
@@ -120,6 +128,55 @@ public class GameBoard extends JComponent{
             System.out.println("");
         }
         System.out.println(message);
+        System.out.println("");
+    }
+
+    public Coordinate getClick() {
+        //wipe out previous click
+        click = null;
+        //wait for a click to happen
+        while(click == null) {
+            //do nothing
+        }
+        return click;
+    }
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //Get x and y of click
+        //shift them so the top and left boarders are gone
+        int x = e.getX() - TILE_SIZE/4;
+        int y = e.getY() - TILE_SIZE/4;
+        
+        //get the row and column of the click
+        int row = y / TILE_SIZE;
+        int col = x / TILE_SIZE;
+        
+        //validate the coordinate
+        if(row >= 0 && row <= 7 
+                && col >= 0 && col <= 7) {
+            click = new Coordinate(row,col);
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+       
     }
     
 }
