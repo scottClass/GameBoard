@@ -23,7 +23,7 @@ public class TestBoard {
         while(true) {
             //wait for the user to click
             Coordinate c = board.getClick();
-            clicked++;
+            clicked ++;
             int row = c.getRow();
             int col = c.getCol();
             //put a piece where they clicked
