@@ -72,6 +72,7 @@ public class GameBoard extends JComponent implements MouseListener{
                 }
             }
         }
+        g.setColor(Color.black);
         g.drawString(message, TILE_SIZE/4, TILE_SIZE * 8 + TILE_SIZE/2);
     }
     
