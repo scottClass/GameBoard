@@ -72,6 +72,7 @@ public class GameBoard extends JComponent implements MouseListener{
                 }
             }
         }
+        g.drawString(message, TILE_SIZE/4, TILE_SIZE * 8 + TILE_SIZE/2);
     }
     
     /**
@@ -137,6 +138,11 @@ public class GameBoard extends JComponent implements MouseListener{
         //wait for a click to happen
         while(click == null) {
             //do nothing
+            try {
+                Thread.sleep(1);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
         return click;
     }
